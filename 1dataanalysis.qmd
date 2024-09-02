@@ -1,0 +1,49 @@
+---
+title: "1dataanalysis"
+
+author: "José e Domingos"
+title-block-banner: true
+format:
+ html: 
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+fontsize: 13pt
+editor: visual
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+
+library(tinytex)
+library(tidyverse)
+library(knitr)
+library(nortest)
+library(gt)
+library(gtsummary)
+
+
+```
+
+```{r}
+dir()
+data_1 <- read.table("adavis.txt", h = TRUE)
+data_1
+attach(data_1)
+head(data_1)
+data_2 <-data_1 %>% transmute(Adjuvant = as.factor(Adjuvante), Taxa = as_factor(Adjuvante), Bloco = as.factor(Bloco), Sub = as.factor(Sub),tresA )
+
+data_2
+attach(data_2)
+
+```
+
+```{r}
+ggplot(data = data_2, aes( x = Adjuvant, y = tresA, color = Bloco )) +  geom_boxplot() + geom_point()
+```
+
+\
